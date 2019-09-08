@@ -1,5 +1,7 @@
 package math.problems;
 
+import java.util.ArrayList;
+
 public class Pattern {
 
 	public static void main(String[] args) {
@@ -8,8 +10,25 @@ public class Pattern {
 		 *
 		 *
 		 */
-		
 
+		int num=100;
+		int count = 1, j = 0;
+		ArrayList<Integer> arrayPattern= new ArrayList<>();
+		int[] array = new int[40];
 
+		while (num > 0) {
+			for (int i = 0; i < 10; i++) {
+				System.out.print(num+",");
+				array[j] = num;
+				num -= count;
+				j++;
+
+			}
+			count++;
+		}
+		System.out.println(" ");
 	}
+
+
 }
+
