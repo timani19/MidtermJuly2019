@@ -21,12 +21,14 @@ public class UseQueue {
 		studentNames.add("Courtney Pulley");
 
 
-		System.out.println(studentNames.peek());// peek from queue- Tashfia
-		System.out.println(studentNames.remove("Elisha Karki"));//remove "Elisha Karki" from queue
-		System.out.println("List after removing" + " " + "Elisha Karki" + studentNames);
-		System.out.println(studentNames.peek());
-		System.out.println(studentNames.poll());// poll from queue
-		System.out.println(studentNames.peek());
+		System.out.println(studentNames.peek());// view head of queue- Tashfia
+		System.out.println("_______________");
+		System.out.println(studentNames.remove());// remove the head of queue, in this case "Tashfia"
+		System.out.println("List after removing" + " " + "Head of Queue: " +"Tashfia Imani" + studentNames);
+		System.out.println("Head of the Queue: " + studentNames.peek()); // view head of the queue- "Elisha Karki"
+		System.out.println(studentNames.poll());// poll from queue [print Head and deletes the head]
+		System.out.println(studentNames.peek()); // peek the head from the queue- "Mahim Naveed"
+		System.out.println(studentNames.add("Jianbin Situ")); // adding new elements
 
 		System.out.println("*******_________________************");
 

@@ -63,6 +63,13 @@ public class CsvReader {
             }
         }
 
+        int totalNumberOfStudents = roster.size();
+        int totalScore = 0;
+        for (Trainee tr: roster) {
+            totalScore=totalScore+tr.getNumberOfExercisesSolved();
+        }
+        System.out.println("Average score of the SeleniumJuly2019 class: "+totalScore/totalNumberOfStudents);
+
     }
 
 }
