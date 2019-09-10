@@ -274,8 +274,12 @@ What are the dependencies for this project?
 
 A.
 what is dependency injection in java?
+
 What is static binding and dynamic binding?
 
+A. Binding which can be resolved at compile time is known as static binding AKA early binding.
+
+When compiler is not able to resolve the binding at compile time is known as Dynamic binding AKA late binding.
 
 
 

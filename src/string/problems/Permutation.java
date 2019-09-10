@@ -14,7 +14,7 @@ public class Permutation {
          * Write Java program to compute all Permutation of a String
          *
          */
-        String s = "BCD";
+        String s = "ABC";
 
         System.out.println("All the permutations of the string are: " + findPermutation(s));
 
