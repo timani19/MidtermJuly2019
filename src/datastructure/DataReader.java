@@ -2,7 +2,11 @@ package datastructure;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+import java.sql.*;
 
 public class DataReader {
 
@@ -24,10 +28,9 @@ public class DataReader {
 		FileReader fr1 = null;
 		BufferedReader br1 = null;
 
+
 		String textFile = "C:\\Users\\Tanim Imani\\IdeaProjects\\MidtermJuly2019\\src\\data\\self-driving-car";
 
-
-		// String textFile = "C:\\Users\\adibi\\Desktop\\nayna\\MidtermNovember2018\\src\\data\\self-driving-car";
 
 		try {
 			fr1 = new FileReader(textFile);
@@ -38,13 +41,16 @@ public class DataReader {
 			}
 		} catch (Exception ex) {
 			System.out.println("File was not found");
-		} finally { // to close the filereader and bufferreadaer instance, always use below code
+		} finally { // to close the filereader and bufferreadaer instance
 			try {
 				fr1.close();
 				br1.close();
 			} catch (Exception ex2) {
 			}
 		}
+
+
+
 	}
 }
 
