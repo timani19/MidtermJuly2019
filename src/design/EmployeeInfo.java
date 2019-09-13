@@ -2,7 +2,7 @@ package design;
 
 import java.util.Scanner;
 
-public class EmployeeInfo extends CompanyStructure {
+public class EmployeeInfo extends Management implements Employee {
 
 	/*This class can be implemented from Employee interface then add additional methods in EmployeeInfo class.
 	 * Also, Employee interface can be implemented into an abstract class.So create an Abstract class
@@ -16,42 +16,54 @@ public class EmployeeInfo extends CompanyStructure {
 	 * Use Exception Handling.
 	 *
 	 */
-	final static String employerName = "Conduent";
+	static String companyName = "Conduent";
 	private int employeeId;
-	private String name;
+	public String employeeName;
 	private String departmentName;
+	private double salary;
 	private int performance;
-	static double salary;
 
-	// Default constructor
+	/*
+	 * You must implement the logic for below 2 methods and
+	 * following 2 methods are prototype as well for other methods need to be design,
+	 * as you will come up with the new ideas.
+	 */
 
-	public EmployeeInfo() {}
+	/*
+	 * you must have multiple constructor.
+	 * Must implement below constructor.
+	 */
+	public EmployeeInfo(int employeeId) {
+		this.employeeId = employeeId;
 
-	public EmployeeInfo(int employeeId){
-		this.employeeId=employeeId;
 	}
 
-	public EmployeeInfo(int employeeId, String name) {
+	public EmployeeInfo(String employeeName, int employeeId) {
+		this.employeeName = employeeName;
 		this.employeeId = employeeId;
-		this.name = name;
 	}
 
-	public EmployeeInfo(int employeeId, String name, String departmentName) {
+	public EmployeeInfo(int employeeId, String employeeName, String departmentName, double salary) {
 		this.employeeId = employeeId;
-		this.name = name;
+		this.employeeName = employeeName;
 		this.departmentName = departmentName;
+		this.salary = salary;
 	}
 
-	public EmployeeInfo(int employeeId, String name, String departmentName, int performance, double salary) {
+	public EmployeeInfo(int employeeId, String employeeName, String departmentName, double salary, int performance) {
 		this.employeeId = employeeId;
-		this.name = name;
+		this.employeeName = employeeName;
 		this.departmentName = departmentName;
+		this.salary = salary;
 		this.performance = performance;
-		this.salary=salary;
 	}
 
-	public static String getEmployerName() {
-		return employerName;
+	public static String getCompanyName() {
+		return companyName;
+	}
+
+	public static void setCompanyName(String companyName) {
+		EmployeeInfo.companyName = companyName;
 	}
 
 	public int getEmployeeId() {
@@ -62,12 +74,12 @@ public class EmployeeInfo extends CompanyStructure {
 		this.employeeId = employeeId;
 	}
 
-	public String getName() {
-		return name;
+	public String getEmployeeName() {
+		return employeeName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
 	}
 
 	public String getDepartmentName() {
@@ -78,6 +90,14 @@ public class EmployeeInfo extends CompanyStructure {
 		this.departmentName = departmentName;
 	}
 
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
 	public int getPerformance() {
 		return performance;
 	}
@@ -86,64 +106,123 @@ public class EmployeeInfo extends CompanyStructure {
 		this.performance = performance;
 	}
 
-	public static double getSalary() {
-		return salary;
+	@Override
+	public int employeeId() {
+		return 0;
 	}
 
-	public static void setSalary(double salary) {
-		EmployeeInfo.salary = salary;
+	@Override
+	public String employeeName() {
+		return null;
 	}
 
-	public static double calculateBonus(double salary, int performance) {
+	@Override
+	public void assignDepartment() {
 
-		double bonus = 0;
+	}
+
+	@Override
+	public int calculateSalary() {
+		return 0;
+	}
+
+	@Override
+	public void getdepartments() {
+		final String departmentA = "Information Technology";
+		final String departmentB = "Service ";
+		final String departmentC = "Production";
+		final String departmentD = "Finance";
+	}
+
+	//employee benefit
+	public void benefitLayout() {
+	}
+
+	//calculate employee salary
+	public double calculateSalary(double salary) {
+		double yearlySalary = salary * 12;
+		return yearlySalary;
+	}
+
+	/*
+	 * This methods should calculate Employee bonus based on salary and performance.
+	 * Then it will return the total yearly bonus. So you need to implement the logic.
+	 * Hints: 10% of the salary for best performance, 8% of the salary for average performance and so on.
+	 * You can set arbitrary number for performance.
+	 * So you probably need to send 2 arguments.
+	 * 10% Rating 5, 8% Rating 4, 6% Rating 3, 0% Rating 2, 0% Rating 1(give warning)
+	 */
+	public static double calculateEmployeeBonus(double salary, int performance) {
+		double yearlyBonus = 0;
 		if (performance == 5) {
-			bonus = salary * 0.1 * 12;
+			yearlyBonus = salary * 0.1 * 12;
 		} else if (performance == 4) {
-			bonus = salary * 0.08 * 12;
+			yearlyBonus = salary * 0.08 * 12;
 		} else if (performance == 3) {
-			bonus = salary * 0.05 * 12;
-		} else{
-			bonus = 0;
+			yearlyBonus = salary * 0.06 * 12;
+		} else if (performance == 2) {
+			yearlyBonus = 0;
+			System.out.println("performance is not upto the mark");
+		} else {
+			yearlyBonus = 0;
 			System.out.println("Poor performance");
 		}
-		return bonus;
+
+		return yearlyBonus;
 	}
 
-	public static int calculateEmployeePension() {
-		int total = 0;
+	/*
+	 * This methods should calculate Employee Pension based on salary and numbers of years with the company.
+	 * Then it will return the total pension. So you need to implement the logic.
+	 * Hints: pension will be 5% of the salary for 1 year, 10% for 2 years with the company and so on.
+	 *
+	 */
+	public static double calculateEmployeePension(double salary) {
+		double total = 0;
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the start date in format (example: May,2015): ");
+		System.out.println("Please enter employees Date of Join in format (example: May,2015): ");
 		String dateOfJoin = sc.nextLine();
 		System.out.println("Please enter today's date in format (example: August,2017): ");
 		String todaysDate = sc.nextLine();
 		String convertedJoiningDate = DateConversion.convertDate(dateOfJoin);
 		String convertedTodaysDate = DateConversion.convertDate(todaysDate);
 
+
 		//implement numbers of year from above two dates
 		//Calculate pension
 
-		if (convertedJoiningDate.endsWith("2015") && convertedTodaysDate.endsWith("2018")) {
-			total = ((int) ((salary * 12) * 0.15));
-		} else if (convertedJoiningDate.endsWith("2016") && convertedTodaysDate.endsWith("2018")) {
-			total = ((int) ((salary * 12) * 0.10));
-		} else if (convertedJoiningDate.endsWith("2017") && convertedTodaysDate.endsWith("2018")) {
-			total = ((int) ((salary * 12) * 0.05));
+		String startYear = convertedJoiningDate.substring(convertedJoiningDate.length() - 4, convertedJoiningDate.length());
+		String currentYear = convertedTodaysDate.substring(convertedTodaysDate.length() - 4, convertedTodaysDate.length());
+
+		//implement numbers of year from above two dates
+		//Calculate pension
+		int start = Integer.parseInt(startYear);
+		int current = Integer.parseInt(currentYear);
+
+		int numberOfYears = current - start;
+
+		if (numberOfYears == 5) {
+			total = salary * .25;
+		} else if (numberOfYears == 4) {
+			total = salary * .20;
+		} else if (numberOfYears == 3) {
+			total = salary * .15;
+		} else if (numberOfYears == 2) {
+			total = salary * .10;
+		} else if (numberOfYears == 1) {
+			total = salary * .05;
+		} else if (numberOfYears == 0) {
+			total = 0;
 		}
-		System.out.println(" Total Pension: " + total);
+		System.out.println("Total pension of the Employee is : $" + total);
+
 		return total;
-	}
-
-
-
-	@Override
-	public String toString(){
-		return "Employee ID: " + employeeId + "Name: " + name + "Department: " + departmentName + "Monthly Salary: " + salary;
 	}
 
 	private static class DateConversion {
 
 		public DateConversion(Months months) {
+
 		}
 
 		public static String convertDate(String date) {
@@ -177,22 +256,22 @@ public class EmployeeInfo extends CompanyStructure {
 					date = 6;
 					break;
 				case July:
-					date = 1;
+					date = 7;
 					break;
 				case August:
-					date = 1;
+					date = 8;
 					break;
 				case September:
-					date = 1;
+					date = 9;
 					break;
 				case October:
-					date = 1;
+					date = 10;
 					break;
 				case November:
-					date = 1;
+					date = 11;
 					break;
 				case December:
-					date = 1;
+					date = 12;
 					break;
 				default:
 					date = 0;
@@ -203,39 +282,3 @@ public class EmployeeInfo extends CompanyStructure {
 		}
 	}
 }
-
-
-
-
-	/*
-	 * declare few static and final fields and some non-static fields
-	 */
-	//static String companyName;
-
-	/*
-	 * You must implement the logic for below 2 methods and
-	 * following 2 methods are prototype as well for other methods need to be design,
-	 * as you will come up with the new ideas.
-	 */
-
-	/*
-	 * you must have multiple constructor.
-	 * Must implement below constructor.
-	 */
-	//public EmployeeInfo(int employeeId){
-
-	//}
-	// public EmployeeInfo(String name, int employeeId){
-
-	//}
-
-	/*
-	 * This methods should calculate Employee bonus based on salary and performance.
-	 * Then it will return the total yearly bonus. So you need to implement the logic.
-	 * Hints: 10% of the salary for best performance, 8% of the salary for average performance and so on.
-	 * You can set arbitrary number for performance.
-	 * So you probably need to send 2 arguments.
-	 *
-	 */
-
-
