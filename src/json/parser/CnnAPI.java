@@ -1,4 +1,21 @@
 package json.parser;
+import databases.ConnectToMongoDB;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.mongodb.util.JSON;
+import databases.ConnectToSqlDB;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CnnAPI {
     /*
@@ -37,4 +54,60 @@ public class CnnAPI {
 	   Store into choice of your database and retrieve.
 
      */
+
+    public static void main(String[] args) throws MalformedURLException, IOException {
+        String sURL = "https://newsapi.org/v2/top-headlines?sources=cnn&apiKey=3a953102a1d7462f80e0e8572592afdd";
+        NewsData newS = null;
+        List<NewsData> newsList = new ArrayList<>();
+        URL url = new URL(sURL);
+        URLConnection request = url.openConnection();
+        request.connect();
+        JsonArray jsonArray = null;
+        JsonParser jp = new JsonParser();
+        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+        JsonObject xd = new JsonObject();
+        xd.add("articles", root);
+        //Create ConnectToSqlDB Object
+        ConnectToMongoDB connectToMongoDB = new ConnectToMongoDB();
+
+        jsonArray = new JsonArray();
+        jsonArray.add(root.getAsJsonObject().get("articles"));
+
+
+        for (int i = 0; i < jsonArray.get(0).getAsJsonArray().size(); i++) {
+            try {
+
+                JsonObject jsonobject = jsonArray.get(0).getAsJsonArray().get(i).getAsJsonObject();
+
+
+                String source = jsonobject.get("source").getAsJsonObject().get("id").toString();
+
+                String author = jsonobject.get("author").toString();
+                String title = jsonobject.get("title").toString();
+                String description = jsonobject.get("description").toString();
+                String u = jsonobject.get("url").toString();
+                String urlToImage = jsonobject.get("urlToImage").toString();
+                String publisherAt = jsonobject.get("publishedAt").toString();
+                String content = jsonobject.get("content").toString();
+
+
+                newS = new NewsData(source, author, title, description, u, urlToImage, publisherAt, content);
+
+
+                newsList.add(newS);
+
+
+            } catch (Exception ex) {
+            }
+        }
+        System.out.println(newsList);
+
+        //Print to the console.
+        for (NewsData entry : newsList) {
+            System.out.println(entry.getSource() + " " + entry.getAuthor() + " " + entry.getTitle() + " " + entry.getDescription() + " " + entry.getUrl() + " " + entry.getUrlToImage() + " " + entry.getPublishedAt() + " " + entry.getContent());
+        }
+
+    }
 }
+
+

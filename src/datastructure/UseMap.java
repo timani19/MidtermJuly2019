@@ -30,49 +30,28 @@ UseMap {
 		cityOfMexico.add("Mexico City");
 
 
-		Map<String, String> usastates = new HashMap<String, String>();
-		usastates.put("NY", "New York");
-		usastates.put("NJ", "New Jersey");
-		usastates.put("FL", "Florida");
+		Map<String, List<String>> listofCities = new HashMap<String, List<String>>();
+		listofCities.put("Cities of USA", cityOfUSA);
+		listofCities.put("Cities of Australia", cityOfAustralia);
+		listofCities.put("Cities of Mexico", cityOfMexico);
 
-		System.out.println("USA states:" + usastates.get("NY"));
 
-		for (Map.Entry entry : usastates.entrySet()) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
+		System.out.println("Iterating using while loop :\n");
+
+		Iterator it = listofCities.entrySet().iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
 		}
 
-		Map<String, List<String>> list = new LinkedHashMap<>();
-		list.put("USA", cityOfUSA);
-		list.put("Australia", cityOfAustralia);
-		list.put("Mexico", cityOfMexico);
-		for (Map.Entry entry : list.entrySet()) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
-		}
+		System.out.println("________________________________________________________");
 
-		System.out.println("************************************");
+		System.out.println("Iterating using for each loop :\n");
 
 
-		System.out.println("Retrieving data of US states using loops");
-		for (Object str : list.keySet()) {
-			System.out.println("KeySet:" + str);
-			for (String str1 : list.get(str)) {
-				System.out.println("Value: " + str1);
-			}
-
-			System.out.println("*************************************");
-
-			// Iterating the data
-			System.out.println("using while loop with Iterator to retrieve data");
-			Iterator itr = list.entrySet().iterator();
-
-			Iterator iterator = list.keySet().iterator();
-			while (iterator.hasNext()) {
-				Object values = iterator.next();
-				for (String str1 : list.get(values)) {
-					System.out.println("Value: " + str1);
-				}
-
-			}
+		for (Map.Entry<String, List<String>> cities : listofCities.entrySet()) {
+			System.out.println(cities.getKey() + "--->" + cities.getValue());
 		}
 	}
 }
+
+

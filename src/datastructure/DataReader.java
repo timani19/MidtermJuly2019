@@ -27,8 +27,29 @@ public class DataReader {
          * Use For Each loop/while loop/Iterator to retrieve data.
          */
 
+        FileReader fr=null;
+        BufferedReader br=null;
 
         String textFile = "C:\\Users\\Tanim Imani\\IdeaProjects\\MidtermJuly2019\\src\\data\\self-driving-car";
 
+        try {
+            fr = new FileReader(textFile);
+            br = new BufferedReader(fr);
+            String data = " ";
+            while ((data = br.readLine()) != null) {
+                System.out.println(data);
+            }
+        } catch (Exception ex) {
+            System.out.println("File was not found");
+        } finally { // to close the filereader and bufferreadaer instance, always use below code
+            try {
+                fr.close();
+                br.close();
+            } catch (Exception ex2) {
+            }
+        }
     }
 }
+
+
+

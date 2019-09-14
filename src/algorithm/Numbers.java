@@ -50,7 +50,7 @@ public class Numbers {
 
 		//Quick Sort
 		randomize (num, n);
-		algo.quickSort(num);
+		algo.quickSort(num, 0, n-1);
 		long quickSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of " + num.length + " numbers in Quick Sort take: " + quickSortExecutionTime + " milli sec");
 
@@ -63,11 +63,11 @@ public class Numbers {
 
 		//Bucket Sort
 		randomize (num, n);
-		algo.bucketSort(num);
+		algo.bucketSort(num, 1000000);
 		System.out.println("Total Execution Time of "+ num.length + " numbers in BucketSort take: " + algo.executionTime + " milli sec");
 
 		//Merge Sort
-		algo.mergeSort(num);
+		algo.mergeSort(num, 0, n-1);
 		long mergSortExecutionTime = algo.executionTime;
 		System.out.println("Total Execution Time of " + num.length + " numbers in Merge Sort take: " + mergSortExecutionTime + " milli sec");
 
@@ -83,6 +83,8 @@ public class Numbers {
 			num[i] = rand.nextInt(1000000);
 		}
 	}
+
+
 
 	public static void randomize( int arr[], int n)
 	{
